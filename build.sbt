@@ -2,8 +2,8 @@ import Dependencies._
 
 ThisBuild / scalaVersion     := "2.12.12"
 ThisBuild / version          := "0.1.0-SNAPSHOT"
-ThisBuild / organization     := "com.example"
-ThisBuild / organizationName := "example"
+ThisBuild / organization     := "org.example"
+ThisBuild / organizationName := "mytestapi"
 
 val tapirVersion = "0.17.4"
 val circeVersion = "0.12.3"
