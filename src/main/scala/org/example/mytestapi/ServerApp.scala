@@ -34,7 +34,7 @@ object ServerApp extends App with LazyLogging {
       )
     )
 
-  logger.info(s"Server online at http://localhost:8080/\nPress RETURN to stop...")
+  logger.info(s"Server online at http://localhost:8080/\nSwagger at http://localhost:8080/docs\nPress RETURN to stop...")
   StdIn.readLine() // let it run until user presses return
   bindingFuture
     .flatMap(_.unbind()) // trigger unbinding from the port
