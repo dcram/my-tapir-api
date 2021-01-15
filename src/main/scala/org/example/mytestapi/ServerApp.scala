@@ -44,16 +44,14 @@ object ServerApp extends App with LazyLogging {
   }
 
   private val routes = concat(
-    path("") {
-      status
-    },
-    path("status") {
-      status
-    },
-    helloRoute,
-    bookRoute,
-    new SwaggerAkka(docs.toYaml).routes
-  )
+      pathPrefix(ContextPath)(concat(
+        path("") { status },
+        path("status") { status },
+        helloRoute,
+        bookRoute)),
+      // See issue here for context pathes: https://github.com/softwaremill/tapir/issues/694
+      new SwaggerAkka(docs.toYaml, s"$ContextPath/docs").routes
+    )
 
   val bindingFuture = Http().newServerAt("localhost", 8080).bind(routes)
 
