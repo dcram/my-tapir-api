@@ -17,7 +17,7 @@ object ClientApp extends App with LazyLogging {
   val backend = AkkaHttpBackend.usingActorSystem(actorSystem)
 
   private val future1: Future[Response[Either[String, Book]]] = SttpClientInterpreter
-    .toRequestThrowDecodeFailures(Endpoints.getBook, Some(uri"http://localhost:8080"))
+    .toRequestThrowDecodeFailures(Endpoints.getBook, Some(uri"http://localhost:8080/mytestapi"))
     .apply(19)
     .send(backend)
 
@@ -35,7 +35,7 @@ object ClientApp extends App with LazyLogging {
 
 
   private val future2: Future[Response[Either[String, String]]] = SttpClientInterpreter
-    .toRequestThrowDecodeFailures(Endpoints.getHello, Some(uri"http://localhost:8080"))
+    .toRequestThrowDecodeFailures(Endpoints.getHello, Some(uri"http://localhost:8080/mytestapi"))
     .apply("Chuck")
     .send(backend)
 

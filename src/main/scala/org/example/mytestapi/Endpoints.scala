@@ -23,7 +23,7 @@ object Endpoints {
       .get
       .in("hello" / path[String]("name"))
       .errorOut(stringBody)
-      .out(jsonBody[String])
+      .out(plainBody[String])
 
   val docs = OpenAPIDocsInterpreter.toOpenAPI(List(getHello, getBook), "My Test API", "1.0")
 

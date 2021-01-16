@@ -1,6 +1,7 @@
 package org.example.mytestapi
 
 import akka.actor.ActorSystem
+import akka.event.Logging
 import akka.http.scaladsl.Http
 import akka.http.scaladsl.model.{ContentTypes, HttpEntity}
 import com.typesafe.scalalogging.LazyLogging
@@ -47,8 +48,8 @@ object ServerApp extends App with LazyLogging {
       pathPrefix(ContextPath)(concat(
         path("") { status },
         path("status") { status },
-        helloRoute,
-        bookRoute)),
+        logRequestResult(("hello", Logging.InfoLevel))(helloRoute),
+        logRequestResult(("book", Logging.InfoLevel))(bookRoute))),
       // See issue here for context pathes: https://github.com/softwaremill/tapir/issues/694
       new SwaggerAkka(docs.toYaml, s"$ContextPath/docs").routes
     )
